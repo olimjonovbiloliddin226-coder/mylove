@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤️ I Love You ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle, #240018, #050008 75%);
+    color: white;
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    position: absolute;
+    top: 6%;
+    width: 100%;
+    text-align: center;
+    color: #ff5ca8;
+    font-size: clamp(24px, 5vw, 42px);
+    text-shadow: 0 0 20px #ff006a;
+}
+
+#scene {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#heart {
+    position: absolute;
+    left: 50%;
+    top: 53%;
+    width: min(90vw, 650px);
+    height: min(75vh, 600px);
+    transform: translate(-50%, -50%);
+}
+
+.word {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    color: #ff69b4;
+    font-size: clamp(10px, 1.7vw, 17px);
+    white-space: nowrap;
+    opacity: 0;
+    text-shadow: 0 0 10px #ff007f;
+    transition: opacity .5s, color .5s;
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+.center-heart {
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(45px, 9vw, 85px);
+    filter: drop-shadow(0 0 20px #ff0055);
+    animation: beat 1s infinite;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.love {
+    position: absolute;
+    bottom: -30px;
+    color: #ff2f85;
+    animation: floatUp linear forwards;
+    pointer-events: none;
+}
+
+@keyframes beat {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px #ff007f; }
+    to { text-shadow: 0 0 18px #ff4da6; }
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+<div id="scene">
+    <h1>I LOVE YOU ❤️</h1>
+    <div id="heart"></div>
+    <div class="center-heart" id="centerHeart">❤️</div>
+</div>
+
+<script>
+const words = [
+    "I love you", "Seni seviyorum",
+    "Ich liebe dich", "Ti amo", "E",
+    "사랑해", "愛してる", "Я тебя люблю",
+    "Aku cinta kamu", "Je t'aime", "Te amo",
+    "Seni seviyorum", "Må te amo", "Ik hou van jou",
+    "E", "I love you", "Love you", "Seni sevaman",
+    "Me quiero", "Niña", "Ich liebe dich",
+    "Te amo", "Seni seviyorum", "Aşkım",
+    "Amor", "I love you"
+];
+
+const heart = document.getElementById("heart");
+const centerHeart = document.getElementById("centerHeart");
+const colors = [
+    "#ff4d88", "#ff1744", "#ff69b4",
+    "#ffffff", "#ffb6c1", "#ff1493"
+];
+
+// Yurak shaklida so'zlarni joylashtirish
+const positions = words.map((word, i) => {
+    const t = (i / words.length) * Math.PI * 2;
+
+    const x = 16 * Math.pow(Math.sin(t), 3);
+    const y = 13 * Math.cos(t)
+        - 5 * Math.cos(2 * t)
+        - 2 * Math.cos(3 * t)
+        - Math.cos(4 * t);
+
+    return {
+        word,
+        x: 50 + x * 2.65,
+        y: 48 - y * 2.65
+    };
+});
+
+positions.forEach((item, i) => {
+    const el = document.createElement("span");
+    el.className = "word";
+    el.textContent = item.word;
+    el.style.left = item.x + "%";
+    el.style.top = item.y + "%";
+    heart.appendChild(el);
+
+    // Har bir so'z navbat bilan paydo bo'ladi
+    setTimeout(() => {
+        el.style.opacity = 1;
+        el.style.color = colors[i % colors.length];
+    }, i * 450);
+});
+
+// Yurak tugagach, yana boshidan boshlanadi
+function restartWords() {
+    const elements = document.querySelectorAll(".word");
+
+    elements.forEach(el => el.style.opacity = 0);
+    centerHeart.style.opacity = 0;
+
+    elements.forEach((el, i) => {
+        setTimeout(() => {
+            el.style.opacity = 1;
+            el.style.color =
+                colors[Math.floor(Math.random() * colors.length)];
+        }, i * 450);
+    });
+
+    setTimeout(() => {
+        centerHeart.style.opacity = 1;
+    }, words.length * 450);
+}
+
+setTimeout(() => {
+    centerHeart.style.opacity = 1;
+}, words.length * 450);
+
+setInterval(restartWords, (words.length + 2) * 450);
+
+// Uchib yuruvchi yurakchalar
+function createLove() {
+    const el = document.createElement("div");
+    el.className = "love";
+    el.textContent = Math.random() > 0.5 ? "❤️" : "💕";
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (12 + Math.random() * 22) + "px";
+    el.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+    document.body.appendChild(el);
+
+    setTimeout(() => el.remove(), 9000);
+}
+
+setInterval(createLove, 250);
+</script>
+</body>
+</html>
