@@ -1,203 +1,837 @@
-
 <!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>❤️ I Love You ❤️</title>
-
+<title>Xush kelibsiz!</title>
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
-    background: radial-gradient(circle, #240018, #050008 75%);
-    color: white;
+    width: 100%;
     min-height: 100vh;
     overflow: hidden;
+    background: #211317;
     font-family: Arial, sans-serif;
 }
-
+/* ANIMATSIYALI FON */
+#background {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+/* ASOSIY SAHNA */
+.container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+    text-align: center;
+    padding: 10px;
+}
+/* MUALLIF */
+.author {
+    color: #ffff00;
+    font-size: clamp(15px, 2vw, 23px);
+    margin-top: 5px;
+}
+/* SARLAVHA */
 h1 {
     position: absolute;
-    top: 6%;
+    top: 10%;
+    left: 0;
     width: 100%;
-    text-align: center;
-    color: #ff5ca8;
-    font-size: clamp(24px, 5vw, 42px);
-    text-shadow: 0 0 20px #ff006a;
+    color: #fff;
+    font-family: Georgia, serif;
+    font-size: clamp(48px, 10vw, 130px);
+    font-weight: bold;
+    line-height: 1.2;
+    text-shadow: 2px 3px 5px #000;
 }
-
-#scene {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
-
-#heart {
+/* MENYU JOYLASHUVI */
+.menu-container {
     position: absolute;
+    top: 65%;
     left: 50%;
-    top: 53%;
-    width: min(90vw, 650px);
-    height: min(75vh, 600px);
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(35px, 9vw, 125px);
+    width: 95%;
+    z-index: 5;
 }
-
-.word {
+/* DUMALOQ MENYULAR */
+.menu-item {
+    position: relative;
+    width: clamp(65px, 8vw, 108px);
+    height: clamp(65px, 8vw, 108px);
+    border: none;
+    border-radius: 50%;
+    background: #ff0808;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255,0,0,0.3);
+    transition: transform .35s ease,
+                box-shadow .35s ease,
+                background .35s ease;
+}
+/* ICHKIDAGI BELGILAR */
+.menu-icon {
+    font-size: clamp(30px, 4vw, 55px);
+    line-height: 1;
+    transition: transform .4s ease;
+}
+/* SICHQONCHA EFFEKTI */
+.menu-item:hover {
+    transform: translateY(-12px) scale(1.12);
+    background: #ff3535;
+    box-shadow:
+        0 0 15px #ff0000,
+        0 0 35px #ff0000,
+        0 0 60px rgba(255,0,0,.5);
+}
+/* MENYU NOMI */
+.menu-label {
     position: absolute;
-    transform: translate(-50%, -50%);
-    color: #ff69b4;
-    font-size: clamp(10px, 1.7vw, 17px);
+    bottom: -42px;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    color: #ffffff;
+    background: rgba(100,0,20,.85);
+    padding: 7px 15px;
+    border-radius: 20px;
+    font-size: 15px;
     white-space: nowrap;
     opacity: 0;
-    text-shadow: 0 0 10px #ff007f;
-    transition: opacity .5s, color .5s;
-    animation: glow 1.5s ease-in-out infinite alternate;
+    visibility: hidden;
+    transition: .3s ease;
 }
-
-.center-heart {
-    position: absolute;
-    left: 50%;
-    top: 48%;
-    transform: translate(-50%, -50%);
-    font-size: clamp(45px, 9vw, 85px);
-    filter: drop-shadow(0 0 20px #ff0055);
-    animation: beat 1s infinite;
-    opacity: 0;
-    transition: opacity 1s;
+.menu-item:hover .menu-label,
+.menu-item.active .menu-label {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
 }
-
-.love {
-    position: absolute;
-    bottom: -30px;
-    color: #ff2f85;
-    animation: floatUp linear forwards;
-    pointer-events: none;
+/* 1-MENYU: YURAK */
+.heart-menu:hover .menu-icon,
+.heart-menu.active .menu-icon {
+    animation: heartBeat .6s infinite;
 }
-
-@keyframes beat {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.2); }
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.4); }
 }
-
-@keyframes glow {
-    from { text-shadow: 0 0 5px #ff007f; }
-    to { text-shadow: 0 0 18px #ff4da6; }
+/* 2-MENYU: XAT */
+.mail-menu:hover .menu-icon,
+.mail-menu.active .menu-icon {
+    animation: mailMove .6s infinite alternate;
 }
-
-@keyframes floatUp {
-    to {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
+@keyframes mailMove {
+    from { transform: rotate(-12deg); }
+    to { transform: rotate(12deg); }
+}
+/* 3-MENYU: KAMERA */
+.camera-menu:hover .menu-icon,
+.camera-menu.active .menu-icon {
+    animation: cameraFlash .8s infinite;
+}
+@keyframes cameraFlash {
+    0%, 100% {
+        filter: brightness(1);
+        transform: scale(1);
+    }
+    50% {
+        filter: brightness(2);
+        transform: scale(1.2);
     }
 }
+/* 4-MENYU: RO'YXAT */
+.list-menu:hover .menu-icon,
+.list-menu.active .menu-icon {
+    animation: listMove .6s infinite alternate;
+}
+@keyframes listMove {
+    from { transform: translateY(-5px); }
+    to { transform: translateY(5px); }
+}
+/* BOSILGANDA */
+.menu-item:active {
+    transform: scale(.88);
+}
+/* TELEFON VA PLANSHEТ */
+@media (max-width: 600px) {
+    .menu-container {
+        top: 65%;
+        width: 94%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+    .menu-item {
+        width: min(19vw, 75px);
+        height: min(19vw, 75px);
+        justify-self: center;
+    }
+    .menu-icon {
+        font-size: 32px;
+    }
+    .menu-label {
+        font-size: 11px;
+        bottom: -35px;
+        padding: 5px 8px;
+    }
+}
+/* TAGYOZUV */
+.subtitle {
+    position: absolute;
+    top: 51%;
+    left: 0;
+    width: 100%;
+    color: red;
+    font-family: Georgia, serif;
+    font-size: clamp(17px, 2.2vw, 25px);
+    font-weight: bold;
+}
+/* TELEFON UCHUN */
+@media (max-width: 600px) {
+    h1 {
+        top: 20%;
+        padding: 0 10px;
+    }
+    .subtitle {
+        top: 48%;
+    }
+}
+/* OYNANING QORAYTIRILGAN FONI */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(7px);
+    opacity: 0;
+    visibility: hidden;
+    transition: .35s ease;
+    padding: 15px;
+}
+/* OYNA OCHILISHI */
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+/* ICHKI OYNA */
+.modal-window {
+    position: relative;
+    width: min(600px, 100%);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 45px 25px 30px;
+    background: linear-gradient(145deg, #471321, #160810);
+    border: 1px solid rgba(255, 100, 140, .6);
+    border-radius: 22px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 0 35px rgba(255, 0, 70, .35);
+    transform: scale(.75);
+    transition: .35s ease;
+}
+.modal-overlay.show .modal-window {
+    transform: scale(1);
+}
+/* YOPISH TUGMASI */
+.close-modal {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: #ff1010;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+.close-modal:hover {
+    transform: rotate(90deg);
+    background: #ff5555;
+}
+/* OYNA SARLAVHASI */
+#modalContent h2 {
+    color: #ff6b9d;
+    font-size: clamp(24px, 5vw, 34px);
+    margin-bottom: 20px;
+}
+#modalContent p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #ffe1eb;
+}
+@media (max-width: 600px) {
+    .modal-window {
+        padding: 50px 18px 25px;
+        max-height: 80vh;
+    }
+    #modalContent p {
+        font-size: 15px;
+    }
+}
+/* Maxsus animatsiya uchun keng oyna */
+.modal-overlay.heart-open .modal-window { width: min(950px, 100%); padding: 50px 10px 10px; }
+#heartFrame { display: block; width: 100%; height: min(72vh, 700px); border: 0; border-radius: 12px; background: #160810; }
+@media (max-width: 600px) { #heartFrame { height: 68vh; } }
+
+/* ATALGANLAR — SHE'RLAR KITOBI */
+.modal-overlay.poems-open .modal-window { width: min(760px, 100%); padding: 48px 20px 22px; }
+.poetry-book { color: #ffe5ed; text-align: center; }
+.poetry-eyebrow { color: #ffadc7; font-size: 12px; letter-spacing: .17em; margin-bottom: 8px; }
+.poetry-title { font-family: Georgia, serif; font-size: clamp(27px, 5vw, 38px); color: #ffc2d5; margin-bottom: 14px; }
+.poetry-divider { width: 76px; height: 1px; background: #be6b87; margin: 0 auto 20px; }
+.poetry-text { white-space: pre-line; font-family: Georgia, serif; font-size: clamp(15px, 2.4vw, 19px); line-height: 1.85; overflow-wrap: anywhere; }
+.poetry-section { margin-bottom: 20px; }
+.poetry-section-label { font-size: 13px; color: #ffb5cf; margin-bottom: 8px; }
+.poetry-controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 22px; }
+.poetry-btn { background: #a72b51; color: white; border: 1px solid #d76a8d; border-radius: 22px; padding: 10px 15px; cursor: pointer; font-size: 14px; }
+.poetry-btn:hover:not(:disabled) { background: #cb3a68; }
+.poetry-btn:disabled { opacity: .35; cursor: not-allowed; }
+.poetry-count { color: #ffb5cf; font-size: 13px; white-space: nowrap; }
+.poetry-fade { animation: poetryAppear .35s ease both; }
+@keyframes poetryAppear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media(max-width: 420px) { .modal-overlay.poems-open .modal-window { padding: 48px 12px 18px; } .poetry-btn { padding: 9px 10px; font-size: 12px; } }
+
+/* SURATLAR — OCHIQ GALEREYA */
+.modal-overlay.gallery-open .modal-window { width:min(900px,100%); padding:48px 18px 24px; }
+.gallery-wrap { text-align:left; }
+.gallery-wrap h2 { text-align:center; }
+.gallery-help { text-align:center; font-size:14px!important; }
+.gallery-upload { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; margin:18px 0; }
+.gallery-upload input { max-width:100%; color:#ffe1eb; font-size:13px; }
+.gallery-action { padding:10px 16px; background:#b52d58; border:1px solid #ff88a9; border-radius:16px; color:white; cursor:pointer; }
+.gallery-action:disabled { opacity:.5; cursor:wait; }
+.gallery-status { text-align:center; min-height:24px; color:#ffb7ce; font-size:14px; margin:10px 0; }
+.gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(145px,1fr)); gap:12px; }
+.gallery-card { margin:0; overflow:hidden; border-radius:12px; background:#310e20; border:1px solid #86405a; }
+.gallery-card img { display:block; width:100%; aspect-ratio:1/1; object-fit:cover; }
+.gallery-empty { text-align:center; padding:25px 5px; color:#ffc3d5; }
+
+/* Katta rasm oynasi */
+.gallery-card { cursor:pointer; position:relative; }
+.gallery-card:focus-visible {outline:3px solid #ffc0d8;outline-offset:3px}
+.gallery-viewer {position:fixed;inset:0;z-index:99999;background:rgba(8,0,8,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 12px 20px;gap:12px}
+.gallery-viewer[hidden] {display:none!important}
+.gallery-viewer img {max-width:min(95vw,1150px);max-height:75vh;object-fit:contain;border-radius:8px}
+.gallery-viewer-actions {display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px}
+.gallery-viewer button,.gallery-viewer a {font:inherit;background:#a52c55;color:white;border:1px solid #ff9bb9;padding:9px 13px;border-radius:10px;cursor:pointer;text-decoration:none}
+.gallery-viewer .gallery-viewer-close {position:absolute;top:10px;right:14px}
+.gallery-admin {margin-top:18px;padding:14px;border:1px solid #81445b;border-radius:14px;background:rgba(36,0,24,.5)}
+.gallery-admin summary {cursor:pointer;text-align:center;color:#ffbbd3}
+.gallery-admin-fields {display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
+.gallery-admin-fields input {max-width:230px;padding:9px;background:#1e0715;color:white;border:1px solid #b96483;border-radius:9px}
+.gallery-delete {display:block;margin:8px auto;color:#fff;background:#8d2442;border:1px solid #f7a0b7;border-radius:8px;padding:7px;cursor:pointer}
+
+/* MUSIQALAR: ixcham video va musiqa pleyeri */
+.modal-overlay.music-open .modal-window { width:min(610px,100%);padding:48px 18px 24px; }
+.music-card {max-width:510px;margin:auto;padding:22px;border:1px solid #ff6bb866;border-radius:24px;background:linear-gradient(145deg,#36112c,#1b0a1c);color:#ffe5f1;box-shadow:0 16px 45px #0007;text-align:center}
+.music-card h2 {color:#ff90c7!important;margin:0 0 12px!important}
+.music-cover {width:96px;height:96px;border-radius:50%;display:grid;place-items:center;margin:4px auto 12px;font-size:42px;background:radial-gradient(circle,#ff79b9,#a32266 65%,#34102c);box-shadow:0 0 30px #ff5ca855}
+.music-title {font-size:18px;font-weight:700;margin-bottom:8px}
+.music-video {width:min(100%,330px);aspect-ratio:16/9;margin:14px auto;overflow:hidden;border-radius:14px;background:#0b0710}
+.music-video iframe {width:100%;height:100%;border:0;display:block}
+.music-controls {display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:12px 0}
+.music-controls button {border:1px solid #ff8cbb88;border-radius:40px;background:#ff5ca8;color:#230a1b;font-size:17px;padding:10px 17px;cursor:pointer}
+.music-controls button:disabled {opacity:.35;cursor:not-allowed}
+.music-controls label {font-size:13px;display:flex;gap:8px;align-items:center}
+.music-controls input {width:90px;accent-color:#ff5ca8}
+.music-note {font-size:12px;color:#e5b6cd;line-height:1.5;margin-top:10px}
 </style>
 </head>
-
 <body>
-<div id="scene">
-    <h1>I LOVE YOU ❤️</h1>
-    <div id="heart"></div>
-    <div class="center-heart" id="centerHeart">❤️</div>
+<canvas id="background"></canvas>
+<div class="container">
+    <div class="author">
+        By: Biloliddin Olimjonov
+    </div>
+    <h1>
+        XUSH<br>
+        KELIBSIZ!
+    </h1>
+<!-- ASOSIY MENYULAR -->
+<div class="menu-container">
+    <button class="menu-item heart-menu" data-name="Maxsus!">
+        <span class="menu-icon">♥</span>
+        <span class="menu-label">Maxsus!</span>
+    </button>
+    <button class="menu-item mail-menu" data-name="Atalganlar">
+        <span class="menu-icon">✉</span>
+        <span class="menu-label">Atalganlar</span>
+    </button>
+    <button class="menu-item camera-menu" data-name="Suratlar">
+        <span class="menu-icon">📷</span>
+        <span class="menu-label">Suratlar</span>
+    </button>
+    <button class="menu-item list-menu" data-name="Musiqalar">
+        <span class="menu-icon">☷</span>
+        <span class="menu-label">Musiqalar</span>
+    </button>
 </div>
-
+<!-- MENYU ICHKI OYNALARI -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-window" id="modalWindow">
+        <button class="close-modal" id="closeModal">✕</button>
+        <div id="modalContent"></div>
+    </div>
+</div>
+    <div class="subtitle">
+        BARCHASI SIZ UCHUN
+    </div>
+</div>
 <script>
-const words = [
-    "I love you", "Seni seviyorum",
-    "Ich liebe dich", "Ti amo", "E",
-    "사랑해", "愛してる", "Я тебя люблю",
-    "Aku cinta kamu", "Je t'aime", "Te amo",
-    "Seni seviyorum", "Må te amo", "Ik hou van jou",
-    "E", "I love you", "Love you", "Seni sevaman",
-    "Me quiero", "Niña", "Ich liebe dich",
-    "Te amo", "Seni seviyorum", "Aşkım",
-    "Amor", "I love you"
-];
-
-const heart = document.getElementById("heart");
-const centerHeart = document.getElementById("centerHeart");
-const colors = [
-    "#ff4d88", "#ff1744", "#ff69b4",
-    "#ffffff", "#ffb6c1", "#ff1493"
-];
-
-// Yurak shaklida so'zlarni joylashtirish
-const positions = words.map((word, i) => {
-    const t = (i / words.length) * Math.PI * 2;
-
-    const x = 16 * Math.pow(Math.sin(t), 3);
-    const y = 13 * Math.cos(t)
-        - 5 * Math.cos(2 * t)
-        - 2 * Math.cos(3 * t)
-        - Math.cos(4 * t);
-
-    return {
-        word,
-        x: 50 + x * 2.65,
-        y: 48 - y * 2.65
-    };
-});
-
-positions.forEach((item, i) => {
-    const el = document.createElement("span");
-    el.className = "word";
-    el.textContent = item.word;
-    el.style.left = item.x + "%";
-    el.style.top = item.y + "%";
-    heart.appendChild(el);
-
-    // Har bir so'z navbat bilan paydo bo'ladi
-    setTimeout(() => {
-        el.style.opacity = 1;
-        el.style.color = colors[i % colors.length];
-    }, i * 450);
-});
-
-// Yurak tugagach, yana boshidan boshlanadi
-function restartWords() {
-    const elements = document.querySelectorAll(".word");
-
-    elements.forEach(el => el.style.opacity = 0);
-    centerHeart.style.opacity = 0;
-
-    elements.forEach((el, i) => {
-        setTimeout(() => {
-            el.style.opacity = 1;
-            el.style.color =
-                colors[Math.floor(Math.random() * colors.length)];
-        }, i * 450);
+const canvas = document.getElementById("background");
+const ctx = canvas.getContext("2d");
+let w, h;
+let particles = [];
+function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    createParticles();
+}
+function createParticles() {
+    particles = [];
+    const count = Math.min(
+        1100,
+        Math.floor(w * h / 700)
+    );
+    for (let i = 0; i < count; i++) {
+        particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: Math.random() * 3 + 0.5,
+            speed: Math.random() * 0.8 + 0.2,
+            alpha: Math.random() * 0.7 + 0.2,
+            phase: Math.random() * Math.PI * 2,
+            color: Math.random() > 0.75
+                ? "#ffffff"
+                : "#ff526b"
+        });
+    }
+}
+let frame = 0;
+function animate() {
+    frame += 0.01;
+    ctx.clearRect(0, 0, w, h);
+    // ORQA FON YORUG'LIGI
+    const bg = ctx.createRadialGradient(
+        w * 0.9, h * 0.05, 10,
+        w * 0.9, h * 0.05, w * 0.9
+    );
+    bg.addColorStop(0, "#a92c35");
+    bg.addColorStop(0.5, "#51252a");
+    bg.addColorStop(1, "#211317");
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+    // YORQIN TO'LQIN
+    const waveY = h * 0.73;
+    for (let i = 0; i < 8; i++) {
+        const glow = ctx.createRadialGradient(
+            w * (0.1 + i * 0.12),
+            waveY,
+            0,
+            w * (0.1 + i * 0.12),
+            waveY,
+            w * 0.18
+        );
+        glow.addColorStop(0, "rgba(255,65,85,0.28)");
+        glow.addColorStop(1, "rgba(255,30,60,0)");
+        ctx.fillStyle = glow;
+        ctx.fillRect(0, h * 0.45, w, h * 0.55);
+    }
+    // ZARRACHALAR
+    particles.forEach(p => {
+        p.y -= p.speed * 0.35;
+        p.x += Math.sin(frame + p.phase) * 0.35;
+        if (p.y < -10) {
+            p.y = h + 10;
+            p.x = Math.random() * w;
+        }
+        if (p.x < -10) p.x = w + 10;
+        if (p.x > w + 10) p.x = -10;
+        const glow = ctx.createRadialGradient(
+            p.x, p.y, 0,
+            p.x, p.y, p.r * 5
+        );
+        glow.addColorStop(0, p.color);
+        glow.addColorStop(0.3, p.color);
+        glow.addColorStop(1, "transparent");
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+        ctx.fill();
     });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(animate);
+}
+window.addEventListener("resize", resize);
+resize();
+animate();
+// MENYU BOSILISH EFFEKTLARI
+const menuItems = document.querySelectorAll(".menu-item");
+const modalOverlay = document.getElementById("modalOverlay");
+const modalContent = document.getElementById("modalContent");
+const closeModal = document.getElementById("closeModal");
 
-    setTimeout(() => {
-        centerHeart.style.opacity = 1;
-    }, words.length * 450);
+// Muallif she'rlari — matnlar yuborilgan shaklda saqlangan.
+const poems = [
+  { title: "Sog'inganman", sections: [
+    "Eshitarman seni dildan,\nJonim menga ayt dardingni.\nQumsab senin iforingni,\nSog'inganman seni juda!",
+    "Bergin menga ozoringni,\nOzordagi zor-zoringni,\nMenga bergin boringni,\nSog'ingamna seni Juda!"
+  ] },
+  { title: "Uzur so'rab qo'y", sections: [
+    "Hafa bolma jonginam,\nAgar seni ranjitsam,\nFaqat mendan o'tsas ham,\nUzur so'rab qo'yaver.",
+    "Harnimani sababi bor,\nSenda asabim egovi bor,\nAsabim lov yonganda,\nUzur so'rab qo'yaver.",
+    "Mayli birov kulsa ham,\nIshor qilgin sevgingni,\nJinnilarcha jilmayib,\nUzur so'rab qo'yaver."
+  ] },
+  { title: "Yana sog'inaman", sections: [
+    "Daftar xoshiyasiga ko'z yoshim to'kib,\nYodimga soldim eslab bir seni.\nHotiralar boshimda og'riqlar qoqib,\nYurak ezilib Sog'indim seni.",
+    "Mayli unitarman erta yoki kech,\nLek qiynalaman vijdonimni yeb,\nArmonim foydasiz boldi endi kech,\nLek baribir yana sog'indim seni.",
+    "Tamaki, mayning foydasi yoq,\nO'zimga kerakku sog'ligim meni,\nSenday vafosizlar dunyoda ko'p,\nLekin faqatgina Sogindim seni!"
+  ] },
+  { title: "Ilhom", sections: [
+    "Ilhomim qo'zg'lib yurakda sokin,\nTarifing bo'ldi hayolda tug'yon,\nShe'r bitay desam visolinga lekin,\nTarifinga qalam ojiz nogahon.",
+    "Ko'zlarimda uyg'onar visoling asli,\nQlam tekkan varoqda hayolim aksi,\nChiroyli unda kitobning naqshi,\nLekin iloji yoq qondirish nafsni!"
+  ] },
+  { title: "Parchalar", isFragments: true, sections: [
+    "Daftar hoshiyasiga siyohim to'kib,\nQoralayman oppoq sahifalarin,\nHar nuqtada kelganda shijoat jo'shib,\nSo'z bilan bezarman uning gardishin,",
+    "Aytayin senga qanday sevishimni,\nYoki bolmasa qancha sevishimni,\nBilarmisan yulduzlar go'zal sonini,\nManashu meni Seni sevishimmi?",
+    "Bular hali holvadir sen uchun bilgin,\nKo'ngil o'rtansa qo'ymasligini,\nKoinot hovlisi cheksizdir bilgin,\nMen seni koinotda ko'p sevishimni."
+  ] }
+];
+let currentPoem = 0;
+function renderPoem(index) {
+    currentPoem = Math.max(0, Math.min(index, poems.length - 1));
+    const poem = poems[currentPoem];
+    modalContent.innerHTML = '';
+    const book = document.createElement('div');
+    book.className = 'poetry-book poetry-fade';
+    const eyebrow = document.createElement('div');
+    eyebrow.className = 'poetry-eyebrow';
+    eyebrow.textContent = 'QALBIMDAN SATRLAR';
+    book.appendChild(eyebrow);
+    const title = document.createElement('h2');
+    title.className = 'poetry-title';
+    title.textContent = poem.title;
+    book.appendChild(title);
+    const divider = document.createElement('div');
+    divider.className = 'poetry-divider';
+    book.appendChild(divider);
+    poem.sections.forEach((part, i) => {
+        const section = document.createElement('div');
+        section.className = 'poetry-section';
+        if (poem.isFragments) {
+            const label = document.createElement('div');
+            label.className = 'poetry-section-label';
+            label.textContent = '✦ ' + (i + 1) + '-parcha ✦';
+            section.appendChild(label);
+        }
+        const text = document.createElement('div');
+        text.className = 'poetry-text';
+        text.textContent = part;
+        section.appendChild(text);
+        book.appendChild(section);
+    });
+    const controls = document.createElement('div');
+    controls.className = 'poetry-controls';
+    const prev = document.createElement('button');
+    prev.type = 'button';
+    prev.className = 'poetry-btn';
+    prev.textContent = '← Oldingi';
+    prev.disabled = currentPoem === 0;
+    prev.addEventListener('click', () => renderPoem(currentPoem - 1));
+    const count = document.createElement('span');
+    count.className = 'poetry-count';
+    count.textContent = (currentPoem + 1) + ' / ' + poems.length;
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.className = 'poetry-btn';
+    next.textContent = 'Keyingi →';
+    next.disabled = currentPoem === poems.length - 1;
+    next.addEventListener('click', () => renderPoem(currentPoem + 1));
+    controls.append(prev, count, next);
+    book.appendChild(controls);
+    modalContent.appendChild(book);
+    document.querySelector('.modal-window').scrollTop = 0;
 }
 
-setTimeout(() => {
-    centerHeart.style.opacity = 1;
-}, words.length * 450);
-
-setInterval(restartWords, (words.length + 2) * 450);
-
-// Uchib yuruvchi yurakchalar
-function createLove() {
-    const el = document.createElement("div");
-    el.className = "love";
-    el.textContent = Math.random() > 0.5 ? "❤️" : "💕";
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.fontSize = (12 + Math.random() * 22) + "px";
-    el.style.animationDuration = (4 + Math.random() * 5) + "s";
-
-    document.body.appendChild(el);
-
-    setTimeout(() => el.remove(), 9000);
+// Supabase ochiq (publishable) kaliti; maxfiy service_role kaliti EMAS.
+const SUPABASE_URL = 'https://rpmorpanevilzsupdltg.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_Bwtd7GyWseAwy56m2iwqPQ_NToeAa2_';
+let galleryClientPromise;
+function getGalleryClient() {
+    if (!galleryClientPromise) {
+        galleryClientPromise = import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm')
+          .then(({createClient}) => createClient(SUPABASE_URL, SUPABASE_KEY));
+    }
+    return galleryClientPromise;
+}
+async function openGallery() {
+    modalContent.innerHTML = `<div class="gallery-wrap">
+      <h2>📷 Suratlar</h2>
+      <p class="gallery-help">Rasm yuklang — u hammaga ko‘rinadi. Shaxsiy suratlarni joylamang.</p>
+      <div class="gallery-upload"><input id="galleryFile" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Rasm tanlash">
+      <button class="gallery-action" id="galleryUpload" type="button">Rasm yuklash</button>
+      <button class="gallery-action" id="galleryRefresh" type="button">Yangilash ↻</button></div>
+      <div id="galleryStatus" class="gallery-status" role="status" aria-live="polite"></div>
+      <div id="galleryGrid" class="gallery-grid"></div>
+      <details class="gallery-admin"><summary>🔐 Admin boshqaruvi</summary>
+        <div class="gallery-admin-fields" id="adminLoginFields">
+          <input type="email" id="adminEmail" placeholder="Admin email" autocomplete="username">
+          <input type="password" id="adminPassword" placeholder="Parol" autocomplete="current-password">
+          <button type="button" class="gallery-action" id="adminLogin">Kirish</button>
+        </div>
+        <div class="gallery-admin-fields"><button type="button" class="gallery-action" id="adminLogout" hidden>Chiqish</button></div>
+        <p id="adminStatus" class="gallery-status" aria-live="polite"></p>
+      </details></div>`;
+    const status=document.getElementById('galleryStatus');
+    const grid=document.getElementById('galleryGrid');
+    const fileInput=document.getElementById('galleryFile');
+    const uploadBtn=document.getElementById('galleryUpload');
+    const refreshBtn=document.getElementById('galleryRefresh');
+    const adminStatus=document.getElementById('adminStatus');
+    const loginFields=document.getElementById('adminLoginFields');
+    const logoutBtn=document.getElementById('adminLogout');
+    const setStatus=msg=>{if(status.isConnected)status.textContent=msg};
+    let photos=[];
+    let adminMode=false;
+    let viewerIndex=-1;
+    const viewer=document.createElement('div');
+    viewer.className='gallery-viewer';viewer.hidden=true;
+    viewer.setAttribute('role','dialog');viewer.setAttribute('aria-modal','true');viewer.setAttribute('aria-label','Katta surat');
+    viewer.innerHTML=`<button class="gallery-viewer-close" type="button">✕ Yopish</button>
+      <img alt="Katta surat"><div class="gallery-viewer-actions">
+      <button type="button" data-nav="-1">❮ Oldingi</button>
+      <span id="galleryViewerCount" aria-live="polite"></span>
+      <button type="button" data-nav="1">Keyingi ❯</button>
+      <a id="galleryDownload" target="_blank" rel="noopener noreferrer" download>⬇ Yuklab olish</a></div>`;
+    document.body.append(viewer);
+    const viewerImg=viewer.querySelector('img');
+    const counter=viewer.querySelector('#galleryViewerCount');
+    const download=viewer.querySelector('#galleryDownload');
+    function showViewer(index){
+      if(!photos.length)return;
+      viewerIndex=(index+photos.length)%photos.length;
+      const photo=photos[viewerIndex];
+      viewerImg.src=photo.url;download.href=photo.url;
+      download.setAttribute('download',photo.name.split('/').pop());
+      counter.textContent=(viewerIndex+1)+' / '+photos.length;
+      viewer.hidden=false;
+    }
+    function closeViewer(){viewer.hidden=true;viewerIndex=-1;viewerImg.removeAttribute('src')}
+    viewer.querySelector('.gallery-viewer-close').onclick=closeViewer;
+    viewer.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>showViewer(viewerIndex+Number(b.dataset.nav)));
+    viewer.onclick=e=>{if(e.target===viewer)closeViewer()};
+    const onKey=e=>{
+      if(viewer.hidden)return;
+      if(e.key==='Escape')closeViewer();
+      if(e.key==='ArrowLeft')showViewer(viewerIndex-1);
+      if(e.key==='ArrowRight')showViewer(viewerIndex+1);
+    };
+    document.addEventListener('keydown',onKey);
+    const observer=new MutationObserver(()=>{
+      if(!grid.isConnected){closeViewer();viewer.remove();document.removeEventListener('keydown',onKey);observer.disconnect()}
+    });
+    observer.observe(modalContent,{childList:true});
+    async function refresh(){
+      setStatus('Rasmlar yuklanmoqda…');
+      try{
+        const client=await getGalleryClient();
+        const images=[],queue=[''],seen=new Set();
+        while(queue.length&&seen.size<250){
+          const folder=queue.shift();if(seen.has(folder))continue;seen.add(folder);
+          let offset=0;
+          while(offset<1000){
+            const {data,error}=await client.storage.from('suratlar').list(folder,{limit:100,offset,sortBy:{column:'name',order:'asc'}});
+            if(error)throw error;
+            const entries=data||[];
+            for(const item of entries){
+              const fullName=folder?folder+'/'+item.name:item.name;
+              if(/\.(jpe?g|png|webp)$/i.test(item.name)&&(item.id||item.metadata))images.push({name:fullName,created_at:item.created_at});
+              else if(!item.id&&!item.metadata&&item.name&&item.name!=='.emptyFolderPlaceholder')queue.push(fullName);
+            }
+            if(entries.length<100)break;offset+=entries.length;
+          }
+        }
+        images.sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
+        photos=images.slice(0,100).map(item=>({...item,url:client.storage.from('suratlar').getPublicUrl(item.name).data.publicUrl}));
+        if(!grid.isConnected)return photos.length;
+        grid.replaceChildren();
+        for(const [i,item] of photos.entries()){
+          const figure=document.createElement('figure');figure.className='gallery-card';
+          figure.tabIndex=0;figure.setAttribute('role','button');figure.setAttribute('aria-label','Suratni katta ochish');
+          const img=document.createElement('img');img.loading='lazy';img.alt='Galereyaga yuklangan surat';img.src=item.url;
+          img.onerror=()=>{img.alt='Rasm ochilmadi';};
+          figure.append(img);
+          figure.onclick=e=>{if(!e.target.closest('.gallery-delete'))showViewer(i)};
+          figure.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();showViewer(i)}};
+          if(adminMode){
+            const del=document.createElement('button');del.className='gallery-delete';del.textContent='🗑 O‘chirish';
+            del.onclick=async e=>{
+              e.stopPropagation();
+              if(!confirm('Ushbu rasmni butunlay o‘chirasizmi?'))return;
+              del.disabled=true;
+              const {error}=await client.storage.from('suratlar').remove([item.name]);
+              if(error){adminStatus.textContent='O‘chirish rad etildi: '+error.message;del.disabled=false;return}
+              adminStatus.textContent='Rasm o‘chirildi.';await refresh();
+            };
+            figure.append(del);
+          }
+          grid.append(figure);
+        }
+        if(!photos.length){const empty=document.createElement('div');empty.className='gallery-empty';empty.textContent='Hozircha surat yo‘q.';grid.append(empty)}
+        setStatus(images.length?images.length+' ta surat topildi':'Rasmlar ro‘yxati bo‘sh.');
+        return images.length;
+      }catch(err){setStatus('Galereya xatosi: '+(err.message||'Noma’lum'));throw err}
+    }
+    uploadBtn.onclick=async()=>{
+      const file=fileInput.files?.[0];
+      if(!file)return setStatus('Avval rasm tanlang.');
+      if(!['image/jpeg','image/png','image/webp'].includes(file.type))return setStatus('Faqat JPG, PNG yoki WebP.');
+      if(file.size>5*1024*1024)return setStatus('Rasm 5 MB dan oshmasin.');
+      uploadBtn.disabled=true;setStatus('Rasm yuklanmoqda…');
+      try{
+        const client=await getGalleryClient();
+        let {data:{user}}=await client.auth.getUser();
+        if(!user){const r=await client.auth.signInAnonymously();if(r.error)throw r.error;user=r.data.user}
+        if(!user)throw new Error('Anonim kirish bajarilmadi');
+        const ext={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[file.type];
+        const name=user.id+'/'+crypto.randomUUID()+'.'+ext;
+        const {error}=await client.storage.from('suratlar').upload(name,file,{contentType:file.type,upsert:false});
+        if(error)throw error;fileInput.value='';await refresh();setStatus('Rasm yuklandi!');
+      }catch(err){setStatus('Yuklashda xato: '+(err.message||'Noma’lum'))}
+      finally{uploadBtn.disabled=false}
+    };
+    refreshBtn.onclick=()=>refresh().catch(console.error);
+    document.getElementById('adminLogin').onclick=async()=>{
+      const email=document.getElementById('adminEmail').value.trim();
+      const password=document.getElementById('adminPassword').value;
+      if(!email||!password){adminStatus.textContent='Email va parolni kiriting.';return}
+      try{
+        const client=await getGalleryClient();
+        const {data,error}=await client.auth.signInWithPassword({email,password});
+        if(error)throw error;
+        // Interfeysga kirish huquqni anglatmaydi: o‘chirishni faqat Supabase RLS siyosati tasdiqlaydi.
+        adminMode=true;loginFields.hidden=true;logoutBtn.hidden=false;
+        document.getElementById('adminPassword').value='';
+        adminStatus.textContent='Kirish bajarildi. O‘chirish uchun admin UID bilan SQL siyosati ham sozlangan bo‘lishi kerak.';
+        await refresh();
+      }catch(err){adminStatus.textContent='Kirishda xato: '+err.message}
+    };
+    logoutBtn.onclick=async()=>{
+      const client=await getGalleryClient();await client.auth.signOut();
+      adminMode=false;loginFields.hidden=false;logoutBtn.hidden=true;
+      adminStatus.textContent='Admin rejimidan chiqildi.';await refresh();
+    };
+    try{await refresh()}catch(e){console.error('Gallery refresh:',e)}
 }
 
-setInterval(createLove, 250);
+const menuPages = {
+    "Atalganlar": `<h2>✉️ Atalganlar</h2><p>Bu yerda maxsus xabarlar joylashadi.</p>`,
+    "Suratlar": `<h2>📷 Suratlar</h2><p>Bu yerda rasmlar galereyasi bo‘ladi.</p>`,
+    "Musiqalar": `<h2>🎵 Musiqalar</h2>`
+};
+
+// YouTube rasmiy iframe pleyeri: ovoz/video ajratib olinmaydi.
+function openMusic(){
+  modalContent.innerHTML = `<div class="music-card">
+    <h2>♫ Musiqalar</h2>
+    <div class="music-cover" aria-hidden="true">♫</div>
+    <div class="music-title">Musiqa 01</div>
+    <div class="music-video"><iframe id="musicYT" title="YouTube musiqa videosi" src="https://www.youtube.com/embed/BHDb6Dn6D5M?enablejsapi=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    <div class="music-controls">
+      <button id="musicPrev" disabled title="Yana musiqa qo‘shilganda ishlaydi">⏮</button>
+      <button id="musicPlay" title="Ijro etish">▶</button>
+      <button id="musicPause" title="Pauza">⏸</button>
+      <button id="musicNext" disabled title="Yana musiqa qo‘shilganda ishlaydi">⏭</button>
+    </div>
+    <div class="music-controls"><label>🔊 Ovoz <input id="musicVolume" type="range" min="0" max="100" value="70" aria-label="Ovoz balandligi"></label></div>
+    <div class="music-note">Videoni YouTube oynasining o‘zidan ham boshqarishingiz mumkin. Ba’zi videolarda sayt ichida ijro cheklangan bo‘lishi mumkin.</div>
+    <p><a href="https://youtu.be/BHDb6Dn6D5M" target="_blank" rel="noopener noreferrer" style="color:#ff9ccc">YouTube’da ochish ↗</a></p>
+  </div>`;
+  const iframe = document.getElementById('musicYT');
+  const command=(func,args=[])=>{
+    if(iframe?.contentWindow) iframe.contentWindow.postMessage(JSON.stringify({event:'command',func,args}),'https://www.youtube.com');
+  };
+  document.getElementById('musicPlay').onclick=()=>command('playVideo');
+  document.getElementById('musicPause').onclick=()=>command('pauseVideo');
+  document.getElementById('musicVolume').oninput=e=>command('setVolume',[Number(e.target.value)]);
+}
+
+menuItems.forEach(item => {
+    item.addEventListener("click", () => {
+        const pageName = item.dataset.name;
+        menuItems.forEach(menu => {
+            menu.classList.remove("active");
+        });
+        item.classList.add("active");
+        if (pageName === "Maxsus!") {
+            modalOverlay.classList.remove("poems-open", "gallery-open", "music-open");
+            modalContent.innerHTML = '<iframe id="heartFrame" title="Maxsus yurak animatsiyasi" src="data:text/html;base64,CjwhRE9DVFlQRSBodG1sPgo8aHRtbCBsYW5nPSJ1eiI+CjxoZWFkPgo8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MS4wIj4KPHRpdGxlPuKdpO+4jyBJIExvdmUgWW91IOKdpO+4jzwvdGl0bGU+Cgo8c3R5bGU+CiogewogICAgbWFyZ2luOiAwOwogICAgcGFkZGluZzogMDsKICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7Cn0KCmJvZHkgewogICAgYmFja2dyb3VuZDogcmFkaWFsLWdyYWRpZW50KGNpcmNsZSwgIzI0MDAxOCwgIzA1MDAwOCA3NSUpOwogICAgY29sb3I6IHdoaXRlOwogICAgbWluLWhlaWdodDogMTAwdmg7CiAgICBvdmVyZmxvdzogaGlkZGVuOwogICAgZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOwp9CgpoMSB7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICB0b3A6IDYlOwogICAgd2lkdGg6IDEwMCU7CiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7CiAgICBjb2xvcjogI2ZmNWNhODsKICAgIGZvbnQtc2l6ZTogY2xhbXAoMjRweCwgNXZ3LCA0MnB4KTsKICAgIHRleHQtc2hhZG93OiAwIDAgMjBweCAjZmYwMDZhOwp9Cgojc2NlbmUgewogICAgcG9zaXRpb246IHJlbGF0aXZlOwogICAgd2lkdGg6IDEwMHZ3OwogICAgaGVpZ2h0OiAxMDB2aDsKICAgIG92ZXJmbG93OiBoaWRkZW47Cn0KCiNoZWFydCB7CiAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICBsZWZ0OiA1MCU7CiAgICB0b3A6IDUzJTsKICAgIHdpZHRoOiBtaW4oOTB2dywgNjUwcHgpOwogICAgaGVpZ2h0OiBtaW4oNzV2aCwgNjAwcHgpOwogICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7Cn0KCi53b3JkIHsKICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpOwogICAgY29sb3I6ICNmZjY5YjQ7CiAgICBmb250LXNpemU6IGNsYW1wKDEwcHgsIDEuN3Z3LCAxN3B4KTsKICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7CiAgICBvcGFjaXR5OiAwOwogICAgdGV4dC1zaGFkb3c6IDAgMCAxMHB4ICNmZjAwN2Y7CiAgICB0cmFuc2l0aW9uOiBvcGFjaXR5IC41cywgY29sb3IgLjVzOwogICAgYW5pbWF0aW9uOiBnbG93IDEuNXMgZWFzZS1pbi1vdXQgaW5maW5pdGUgYWx0ZXJuYXRlOwp9CgouY2VudGVyLWhlYXJ0IHsKICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgIGxlZnQ6IDUwJTsKICAgIHRvcDogNDglOwogICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7CiAgICBmb250LXNpemU6IGNsYW1wKDQ1cHgsIDl2dywgODVweCk7CiAgICBmaWx0ZXI6IGRyb3Atc2hhZG93KDAgMCAyMHB4ICNmZjAwNTUpOwogICAgYW5pbWF0aW9uOiBiZWF0IDFzIGluZmluaXRlOwogICAgb3BhY2l0eTogMDsKICAgIHRyYW5zaXRpb246IG9wYWNpdHkgMXM7Cn0KCi5sb3ZlIHsKICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgIGJvdHRvbTogLTMwcHg7CiAgICBjb2xvcjogI2ZmMmY4NTsKICAgIGFuaW1hdGlvbjogZmxvYXRVcCBsaW5lYXIgZm9yd2FyZHM7CiAgICBwb2ludGVyLWV2ZW50czogbm9uZTsKfQoKQGtleWZyYW1lcyBiZWF0IHsKICAgIDAlLCAxMDAlIHsgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSkgc2NhbGUoMSk7IH0KICAgIDUwJSB7IHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpIHNjYWxlKDEuMik7IH0KfQoKQGtleWZyYW1lcyBnbG93IHsKICAgIGZyb20geyB0ZXh0LXNoYWRvdzogMCAwIDVweCAjZmYwMDdmOyB9CiAgICB0byB7IHRleHQtc2hhZG93OiAwIDAgMThweCAjZmY0ZGE2OyB9Cn0KCkBrZXlmcmFtZXMgZmxvYXRVcCB7CiAgICB0byB7CiAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC0xMTB2aCkgcm90YXRlKDM2MGRlZyk7CiAgICAgICAgb3BhY2l0eTogMDsKICAgIH0KfQo8L3N0eWxlPgo8L2hlYWQ+Cgo8Ym9keT4KPGRpdiBpZD0ic2NlbmUiPgogICAgPGgxPkkgTE9WRSBZT1Ug4p2k77iPPC9oMT4KICAgIDxkaXYgaWQ9ImhlYXJ0Ij48L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImNlbnRlci1oZWFydCIgaWQ9ImNlbnRlckhlYXJ0Ij7inaTvuI88L2Rpdj4KPC9kaXY+Cgo8c2NyaXB0Pgpjb25zdCB3b3JkcyA9IFsKICAgICJJIGxvdmUgeW91IiwgIlNlbmkgc2V2aXlvcnVtIiwKICAgICJJY2ggbGllYmUgZGljaCIsICJUaSBhbW8iLCAiRSIsCiAgICAi7IKs656R7ZW0IiwgIuaEm+OBl+OBpuOCiyIsICLQryDRgtC10LHRjyDQu9GO0LHQu9GOIiwKICAgICJBa3UgY2ludGEga2FtdSIsICJKZSB0J2FpbWUiLCAiVGUgYW1vIiwKICAgICJTZW5pIHNldml5b3J1bSIsICJNw6UgdGUgYW1vIiwgIklrIGhvdSB2YW4gam91IiwKICAgICJFIiwgIkkgbG92ZSB5b3UiLCAiTG92ZSB5b3UiLCAiU2VuaSBzZXZhbWFuIiwKICAgICJNZSBxdWllcm8iLCAiTmnDsWEiLCAiSWNoIGxpZWJlIGRpY2giLAogICAgIlRlIGFtbyIsICJTZW5pIHNldml5b3J1bSIsICJBxZ9rxLFtIiwKICAgICJBbW9yIiwgIkkgbG92ZSB5b3UiCl07Cgpjb25zdCBoZWFydCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJoZWFydCIpOwpjb25zdCBjZW50ZXJIZWFydCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJjZW50ZXJIZWFydCIpOwpjb25zdCBjb2xvcnMgPSBbCiAgICAiI2ZmNGQ4OCIsICIjZmYxNzQ0IiwgIiNmZjY5YjQiLAogICAgIiNmZmZmZmYiLCAiI2ZmYjZjMSIsICIjZmYxNDkzIgpdOwoKLy8gWXVyYWsgc2hha2xpZGEgc28nemxhcm5pIGpveWxhc2h0aXJpc2gKY29uc3QgcG9zaXRpb25zID0gd29yZHMubWFwKCh3b3JkLCBpKSA9PiB7CiAgICBjb25zdCB0ID0gKGkgLyB3b3Jkcy5sZW5ndGgpICogTWF0aC5QSSAqIDI7CgogICAgY29uc3QgeCA9IDE2ICogTWF0aC5wb3coTWF0aC5zaW4odCksIDMpOwogICAgY29uc3QgeSA9IDEzICogTWF0aC5jb3ModCkKICAgICAgICAtIDUgKiBNYXRoLmNvcygyICogdCkKICAgICAgICAtIDIgKiBNYXRoLmNvcygzICogdCkKICAgICAgICAtIE1hdGguY29zKDQgKiB0KTsKCiAgICByZXR1cm4gewogICAgICAgIHdvcmQsCiAgICAgICAgeDogNTAgKyB4ICogMi42NSwKICAgICAgICB5OiA0OCAtIHkgKiAyLjY1CiAgICB9Owp9KTsKCnBvc2l0aW9ucy5mb3JFYWNoKChpdGVtLCBpKSA9PiB7CiAgICBjb25zdCBlbCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNwYW4iKTsKICAgIGVsLmNsYXNzTmFtZSA9ICJ3b3JkIjsKICAgIGVsLnRleHRDb250ZW50ID0gaXRlbS53b3JkOwogICAgZWwuc3R5bGUubGVmdCA9IGl0ZW0ueCArICIlIjsKICAgIGVsLnN0eWxlLnRvcCA9IGl0ZW0ueSArICIlIjsKICAgIGhlYXJ0LmFwcGVuZENoaWxkKGVsKTsKCiAgICAvLyBIYXIgYmlyIHNvJ3ogbmF2YmF0IGJpbGFuIHBheWRvIGJvJ2xhZGkKICAgIHNldFRpbWVvdXQoKCkgPT4gewogICAgICAgIGVsLnN0eWxlLm9wYWNpdHkgPSAxOwogICAgICAgIGVsLnN0eWxlLmNvbG9yID0gY29sb3JzW2kgJSBjb2xvcnMubGVuZ3RoXTsKICAgIH0sIGkgKiA0NTApOwp9KTsKCi8vIFl1cmFrIHR1Z2FnYWNoLCB5YW5hIGJvc2hpZGFuIGJvc2hsYW5hZGkKZnVuY3Rpb24gcmVzdGFydFdvcmRzKCkgewogICAgY29uc3QgZWxlbWVudHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCIud29yZCIpOwoKICAgIGVsZW1lbnRzLmZvckVhY2goZWwgPT4gZWwuc3R5bGUub3BhY2l0eSA9IDApOwogICAgY2VudGVySGVhcnQuc3R5bGUub3BhY2l0eSA9IDA7CgogICAgZWxlbWVudHMuZm9yRWFjaCgoZWwsIGkpID0+IHsKICAgICAgICBzZXRUaW1lb3V0KCgpID0+IHsKICAgICAgICAgICAgZWwuc3R5bGUub3BhY2l0eSA9IDE7CiAgICAgICAgICAgIGVsLnN0eWxlLmNvbG9yID0KICAgICAgICAgICAgICAgIGNvbG9yc1tNYXRoLmZsb29yKE1hdGgucmFuZG9tKCkgKiBjb2xvcnMubGVuZ3RoKV07CiAgICAgICAgfSwgaSAqIDQ1MCk7CiAgICB9KTsKCiAgICBzZXRUaW1lb3V0KCgpID0+IHsKICAgICAgICBjZW50ZXJIZWFydC5zdHlsZS5vcGFjaXR5ID0gMTsKICAgIH0sIHdvcmRzLmxlbmd0aCAqIDQ1MCk7Cn0KCnNldFRpbWVvdXQoKCkgPT4gewogICAgY2VudGVySGVhcnQuc3R5bGUub3BhY2l0eSA9IDE7Cn0sIHdvcmRzLmxlbmd0aCAqIDQ1MCk7CgpzZXRJbnRlcnZhbChyZXN0YXJ0V29yZHMsICh3b3Jkcy5sZW5ndGggKyAyKSAqIDQ1MCk7CgovLyBVY2hpYiB5dXJ1dmNoaSB5dXJha2NoYWxhcgpmdW5jdGlvbiBjcmVhdGVMb3ZlKCkgewogICAgY29uc3QgZWwgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCJkaXYiKTsKICAgIGVsLmNsYXNzTmFtZSA9ICJsb3ZlIjsKICAgIGVsLnRleHRDb250ZW50ID0gTWF0aC5yYW5kb20oKSA+IDAuNSA/ICLinaTvuI8iIDogIvCfkpUiOwogICAgZWwuc3R5bGUubGVmdCA9IE1hdGgucmFuZG9tKCkgKiAxMDAgKyAidnciOwogICAgZWwuc3R5bGUuZm9udFNpemUgPSAoMTIgKyBNYXRoLnJhbmRvbSgpICogMjIpICsgInB4IjsKICAgIGVsLnN0eWxlLmFuaW1hdGlvbkR1cmF0aW9uID0gKDQgKyBNYXRoLnJhbmRvbSgpICogNSkgKyAicyI7CgogICAgZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChlbCk7CgogICAgc2V0VGltZW91dCgoKSA9PiBlbC5yZW1vdmUoKSwgOTAwMCk7Cn0KCnNldEludGVydmFsKGNyZWF0ZUxvdmUsIDI1MCk7Cjwvc2NyaXB0Pgo8L2JvZHk+CjwvaHRtbD4K" loading="eager"></iframe>';
+            modalOverlay.classList.add("heart-open");
+        } else if (pageName === "Suratlar") {
+            modalOverlay.classList.remove("heart-open", "poems-open", "music-open");
+            modalOverlay.classList.add("gallery-open");
+            openGallery();
+        } else if (pageName === "Atalganlar") {
+            modalOverlay.classList.remove("heart-open");
+            modalOverlay.classList.add("poems-open");
+            renderPoem(0);
+        } else if (pageName === "Musiqalar") {
+            modalOverlay.classList.remove("heart-open", "poems-open", "gallery-open");
+            modalOverlay.classList.add("music-open");
+            openMusic();
+        } else {
+            modalContent.innerHTML = menuPages[pageName] || "<p>Bo‘lim tayyorlanmoqda.</p>";
+            modalOverlay.classList.remove("heart-open");
+        }
+        modalOverlay.classList.add("show");
+    });
+});
+function hideModal() {
+    modalOverlay.classList.remove("show");
+    modalOverlay.classList.remove("heart-open");
+    modalOverlay.classList.remove("poems-open", "gallery-open", "music-open");
+    modalContent.innerHTML = "";
+    menuItems.forEach(item => {
+        item.classList.remove("active");
+    });
+}
+closeModal.addEventListener("click", hideModal);
+modalOverlay.addEventListener("click", event => {
+    if (event.target === modalOverlay) {
+        hideModal();
+    }
+});
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        hideModal();
+    }
+});
 </script>
 </body>
 </html>
